@@ -38,11 +38,11 @@ const newPosts = posts
 ---
 
 <Layout>
-  <section class="mt-4 flex flex-col items-center gap-8 px-4">
-    <button type="submit" class="px-6 py-3 mr-4 rounded-md bg-muted text-background font-bold hover:cursor-pointer">
+  <section class="my-4 flex flex-col items-center gap-8 px-4">
+    <button type="submit" class="px-6 py-3 rounded-md bg-muted text-background font-bold hover:cursor-pointer">
       <a href="/new">Crear nueva publicación</a>
     </button>
-    <h2 class="text-2xl text-center font-semibold text-text">
+    <h2 class="text-2xl m-0 text-center font-semibold text-text">
       {isVoid ? 'Upss... No hay publicaciones disponibles.' : 'Publicaciones recientes:'}
     </h2>
     <div class="w-full flex flex-col items-center gap-6">
