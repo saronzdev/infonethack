@@ -3,7 +3,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
 
-import node from '@astrojs/node';
+//import node from '@astrojs/node';
+
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,7 +15,5 @@ export default defineConfig({
   output: 'server',
   integrations: [mdx()],
 
-  adapter: node({
-    mode: 'standalone'
-  })
-});
+  adapter: vercel()
+})
