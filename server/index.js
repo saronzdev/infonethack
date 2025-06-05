@@ -7,7 +7,7 @@ import 'dotenv/config'
 const env = process.env.NODE_ENV || 'development'
 const isProd = env === 'production'
 const PORT = process.env.PORT || 3000
-const DOMAIN = process.env.DOMAIN || 'http://localhost:4321'
+const DOMAIN = process.env.DOMAIN
 
 let astroHandler
 if (isProd) {
@@ -34,7 +34,7 @@ const app = express()
 
 app.use(cors({
   origin: isProd 
-    ? 'https://tu-dominio.com' 
+    ? DOMAIN 
     : 'http://localhost:4321',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
