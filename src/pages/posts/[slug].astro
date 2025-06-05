@@ -2,20 +2,41 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
-import {marked} from 'marked'
+import { marked } from 'marked'
 import Layout from '../../layouts/Layout.astro'
 import '../../styles/posts.css'
 
-const {slug} = Astro.params
-const filePath = path.join(process.cwd(), 'src', 'content', 'posts', `${slug}.md`)
+const BASE_URL = import.meta.env.BACKEND
 
-if (!fs.existsSync(filePath)) return Astro.redirect('/404')
+const { slug } = Astro.params
 
-const raw = fs.readFileSync(filePath, 'utf-8')
-const {data, content} = matter(raw)
+const fetchPost = async () => {
+  try {
+    const response = await fetch(BASE_URL + `/api/posts/${slug}`)
+    if (!response.ok) {
+      console.error('Error fetching post:', response.statusText)
+      return null
+    }
+    const result = await response.json()
+    return result
+  } catch (error) {
+    console.error('Error fetching post:', error)
+    return null
+  }
+}
+
+const raw = await fetchPost()
+
+if (!raw) {
+  return Astro.redirect('/404')
+}
+const { content } = matter(raw.content)
 const html = marked(content)
 ---
 
 <Layout>
-  <div class="post-content flex flex-col justify-center items-center text-white py-4" set:html={html} />
+  <div
+    class="post-content flex flex-col justify-center items-center text-white py-4"
+    set:html={html}
+  />
 </Layout>
