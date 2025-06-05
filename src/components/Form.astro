@@ -3,9 +3,9 @@ import 'dotenv/config'
 const BACKEND_URL = process.env.BACKEND || 'http://localhost:3000'
 ---
 
-<section class="w-full flex flex-col justify-center items-center">
-  <h2 class="mt-4 text-4xl text-text font-semibold">Publicación</h2>
-  <form id="form" class="w-2/3 max-w-3xl p-6 m-4 border-2 border-muted rounded-lg shadow-lg">
+<section class="p-2 w-full flex flex-col justify-center items-center">
+  <h2 class="m-8 text-4xl text-text font-semibold">Publicación</h2>
+  <form id="form" class="w-full md:w-2/3 md:max-w-3xl p-6 border-2 border-muted rounded-lg shadow-lg">
     <div class="mb-6 space-y-2">
       <label for="title" class="block text-lg font-medium text-text">Título</label>
       <input
@@ -60,7 +60,7 @@ const BACKEND_URL = process.env.BACKEND || 'http://localhost:3000'
       </div>
     </div>
     <div class="flex justify-end">
-      <button type="submit" class="px-6 py-3 mr-4 rounded-md bg-muted text-background font-bold">
+      <button type="submit" class="px-6 py-3 mr-4 rounded-md bg-muted text-background font-bold hover:cursor-pointer">
         Publicar
       </button>
     </div>
