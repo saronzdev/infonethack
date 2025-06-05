@@ -1,0 +1,31 @@
+---
+type Post = {
+  frontmatter: {
+    title: string
+    date: string
+    description: string
+  }
+  file: string
+}
+const posts = Object.values(import.meta.glob('../content/posts/*.md', { eager: true })) as Post[]
+const links = posts.map(post => {
+  const file = post.file
+  const url = `posts${file.slice(file.lastIndexOf('/'), file.lastIndexOf('.'))}`
+  return url
+})
+---
+
+<main class="flex flex-col justify-start items-center text-cyan-50">
+  <section>
+    <h2 class="p-4 text-4xl font-semibold">Últimos posts:</h2>
+    <ul class="flex flex-col justify-center items-center m-0 text-center">
+      {posts.map((post, i) => {
+        return (
+        <li>
+          <a class="mx-4 underline text-2xl font-medium" href={links[i]}>{post.frontmatter.title}</a>
+          <span>{new Date(post.frontmatter.date).toLocaleString()}</span>
+        </li>
+      )})}   
+    </ul>
+  </section>
+</main>

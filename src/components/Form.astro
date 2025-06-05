@@ -1,0 +1,118 @@
+---
+import 'dotenv/config'
+const BACKEND_URL = process.env.BACKEND || 'http://localhost:3000'
+---
+
+<section class="w-full flex flex-col justify-center items-center">
+  <h2 class="mt-4 text-4xl text-text font-semibold">Publicación</h2>
+  <form id="form" class="w-2/3 max-w-3xl p-6 m-4 border-2 border-muted rounded-lg shadow-lg">
+    <div class="mb-6 space-y-2">
+      <label for="title" class="block text-lg font-medium text-text">Título</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="Escribe un título atractivo..."
+        class="w-full p-3 border border-muted rounded-md placeholder-muted transition-colors focus:border-primary focus:outline-none text-text"
+      />
+    </div>
+
+    <div class="mb-6 space-y-2">
+      <label for="date" class="block text-lg font-medium text-text">Fecha y hora</label>
+      <input
+        id="date"
+        name="date"
+        type="datetime-local"
+        class="w-full p-3 border border-muted rounded-md placeholder-muted transition-colors focus:border-primary focus:outline-none [color-scheme:dark] text-text [&:not(:valid)]:text-muted [&::-webkit-calendar-picker-indicator]:opacity-70 [&::-webkit-calendar-picker-indicator]:hover:opacity-100 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:p-1 [&::-webkit-calendar-picker-indicator]:rounded [&::-webkit-calendar-picker-indicator]:hover:bg-surface/50"
+      />
+    </div>
+
+    <div class="mb-6 space-y-2">
+      <label for="description" class="block text-lg font-medium text-text">Descripción</label>
+      <input
+        id="description"
+        name="description"
+        type="text"
+        placeholder="Una breve descripción del contenido..."
+        class="w-full p-3 border border-muted rounded-md placeholder-muted transition-colors focus:border-primary focus:outline-none text-text"
+      />
+    </div>
+
+    <div class="mb-6 space-y-2">
+      <label for="body" class="block text-lg font-medium text-text">Contenido</label>
+      <div class="relative">
+        <textarea
+          id="body"
+          name="md"
+          placeholder="Escribe tu contenido en Markdown...
+
+# Ejemplo de encabezado y ## Subencabezado
+
+**Texto en negrita** y *texto en cursiva*
+
+- Lista de elementos
+- Otro elemento
+
+```código```"
+          rows="12"
+          class="w-full p-3 border border-muted rounded-md placeholder-muted resize-vertical font-mono text-sm leading-relaxed transition-colors focus:border-primary focus:outline-none text-text resize-none"
+        ></textarea>
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <button type="submit" class="px-6 py-3 mr-4 rounded-md bg-muted text-background font-bold">
+        Publicar
+      </button>
+    </div>
+  </form>
+</section>
+
+<script define:vars={{ BACKEND_URL }}>
+  const form = document.getElementById('form')
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const data = new FormData(form)
+    const bodyInput = data.get('md').trim()
+    const titleInput = data.get('title').trim()
+    const dateInput = new Date(data.get('date'))
+    const descriptionInput = data.get('description').trim()
+
+    if (!titleInput || !dateInput || !descriptionInput || !bodyInput) {
+      alert('Por favor, completa todos los campos.')
+      return
+    }
+    if (isNaN(new Date(dateInput).getTime())) {
+      alert('Por favor, ingresa una fecha válida.')
+      return
+    }
+
+    const body = JSON.stringify({
+      title: titleInput,
+      date: dateInput.toISOString(),
+      description: descriptionInput,
+      body: bodyInput
+    })
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/blog`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body
+      })
+
+      if (!response.ok) {
+        throw new Error(`Error ${response.status}: ${response.statusText}`)
+      }
+
+      alert('Post creado exitosamente!')
+      form.reset()
+      window.location.href = '/'
+    } catch (error) {
+      console.error('Error al crear el post:', error)
+      alert('Error al crear el post. Por favor, intenta de nuevo.')
+    }
+  })
+</script>

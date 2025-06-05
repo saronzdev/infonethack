@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@theme {
+  --color-background: #0f172a; /* Slate 900 - Un azul oscuro más profundo */
+  --color-surface: #1e293b;   /* Slate 800 - Un contraste suave para elementos elevados */
+  --color-text: #f8fafc;      /* Slate 50 - Texto más claro para mejor legibilidad */
+  --color-muted: #94a3b8;     /* Slate 400 - Un gris medio para texto secundario */
+  --color-accent: #38bdf8;    /* Sky 400 - Un azul vibrante para acentos */
+  --color-success: #4ade80;   /* Green 400 - Un verde más vibrante */
+}

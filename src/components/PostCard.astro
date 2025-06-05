@@ -1,0 +1,38 @@
+---
+interface Props {
+  title: string;
+  description: string
+  date: string
+  slug: string
+}
+
+const { title, description, date, slug } = Astro.props
+const formattedDate = new Date(date).toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+})
+---
+
+<article class="group w-full max-w-2xl bg-surface rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-accent/10 border border-muted/20">
+  <a href={`/posts/${slug}`} class="block p-6">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-text group-hover:text-accent transition-colors">
+          {title}
+        </h2>
+        <time class="text-sm text-muted" datetime={date}>
+          {formattedDate}
+        </time>
+      </div>
+      <p class="text-muted line-clamp-2">
+        {description}
+      </p>
+      <div class="flex justify-end">
+        <span class="text-accent text-sm font-medium group-hover:underline">
+          Leer más →
+        </span>
+      </div>
+    </div>
+  </a>
+</article> 
