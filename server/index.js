@@ -9,11 +9,11 @@ const isProd = env === 'production'
 const PORT = process.env.PORT || 3000
 const DOMAIN = process.env.DOMAIN
 
-let astroHandler
-if (isProd) {
-  const { handler } = await import('../dist/server/entry.mjs')
-  astroHandler = handler
-}
+// let astroHandler
+// if (isProd) {
+//   const { handler } = await import('../dist/server/entry.mjs')
+//   astroHandler = handler
+// }
 
 const titleToValidName = (title) => {
   return title
@@ -87,9 +87,9 @@ ${body}`
 
 app.use(errorHandler)
 
-if (isProd && astroHandler) {
-  app.use(astroHandler)
-}
+// if (isProd && astroHandler) {
+//   app.use(astroHandler)
+// }
 
 app.listen(3000, (error) => {
   if (error) {
