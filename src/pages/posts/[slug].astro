@@ -1,6 +1,4 @@
 ---
-import fs from 'node:fs'
-import path from 'node:path'
 import matter from 'gray-matter'
 import { marked } from 'marked'
 import Layout from '../../layouts/Layout.astro'
@@ -35,8 +33,5 @@ const html = marked(content)
 ---
 
 <Layout>
-  <div
-    class="post-content flex flex-col justify-center items-center text-white py-4"
-    set:html={html}
-  />
+  <div class="post-content" set:html={html} />
 </Layout>
