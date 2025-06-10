@@ -1,6 +1,4 @@
-import { config } from './config'
-
-export async function submitPost(formElement) {
+export async function submitPost(formElement, apiUrl) {
   const data = new FormData(formElement)
   const bodyInput = data.get('md').trim()
   const titleInput = data.get('title').trim()
@@ -28,7 +26,7 @@ export async function submitPost(formElement) {
     body: bodyInput
   })
 
-  const response = await fetch(`${config.BACKEND_URL}/api/posts`, {
+  const response = await fetch(`${apiUrl}/api/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

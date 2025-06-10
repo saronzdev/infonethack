@@ -1,10 +1,10 @@
+---
+const API_URL = import.meta.env.API_URL
+---
+
 <section class="p-4 w-full flex flex-col justify-center items-center">
   <h2 class="p-2 text-4xl text-text font-light">Publicación</h2>
-  <form
-    id="form"
-    class="w-full md:w-2/3 md:max-w-3xl p-6 border-2 border-muted rounded-lg shadow-lg"
-    onsubmit="return false"
-  >
+  <form id="form" class="w-full md:w-2/3 md:max-w-3xl p-6 border-2 border-muted rounded-lg shadow-lg">
     <div class="mb-6 space-y-2">
       <label for="title" class="block text-lg font-medium text-text">Título</label>
       <input
@@ -81,8 +81,8 @@
   </form>
 </section>
 
-<script type="module">
-  import { submitPost } from '../modules/submitPost'
+<script type="module" define:vars={{ API_URL }}>
+  import { submitPost } from '/modules/submitPost.js'
 
   const form = document.getElementById('form')
 
@@ -90,7 +90,7 @@
     e.preventDefault()
 
     try {
-      await submitPost(form)
+      await submitPost(form, API_URL)
       alert('Post creado exitosamente!')
       form.reset()
       window.location.href = '/'
