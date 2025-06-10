@@ -1,10 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-import mdx from '@astrojs/mdx';
-
-//import node from '@astrojs/node';
-
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
@@ -13,7 +9,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   output: 'server',
-  integrations: [mdx()],
-
   adapter: vercel()
 })

@@ -7,20 +7,16 @@
     "server": "node --watch src/backend/index.js",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "start": "NODE_ENV=production node server/index.js"
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.0",
     "@astrojs/node": "^9.2.2",
     "@astrojs/vercel": "^8.1.5",
     "@tailwindcss/vite": "^4.1.8",
     "astro": "^5.8.1",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0",
     "marked": "^15.0.12",
-    "morgan": "^1.10.0",
     "tailwindcss": "^4.1.8"
   }
 }

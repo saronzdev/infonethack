@@ -1,6 +1,6 @@
 {
-  "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
-  "installCommand": "npm install",
+  "buildCommand": "pnpm run build",
+  "devCommand": "pnpm run astro dev",
+  "installCommand": "pnpm install",
   "outputDirectory": "dist"
 }
