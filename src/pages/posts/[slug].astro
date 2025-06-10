@@ -2,9 +2,9 @@
 import { marked } from 'marked'
 import Layout from '../../layouts/Layout.astro'
 import '../../styles/posts.css'
+import { config } from '../../config.js'
 
-const API_URL = import.meta.env.API_URL
-
+const API_URL = config.API_URL
 const { slug } = Astro.params
 
 const fetchPost = async () => {
